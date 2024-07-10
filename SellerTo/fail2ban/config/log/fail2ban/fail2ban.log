@@ -1,0 +1,17 @@
+2024-07-10 15:00:59,416 fail2ban.server         [146]: INFO    --------------------------------------------------
+2024-07-10 15:00:59,417 fail2ban.server         [146]: INFO    Starting Fail2ban v1.0.2
+2024-07-10 15:00:59,421 fail2ban.observer       [146]: INFO    Observer start...
+2024-07-10 15:00:59,465 fail2ban.database       [146]: INFO    Connected to fail2ban persistent database '/config/fail2ban/fail2ban.sqlite3'
+2024-07-10 15:00:59,482 fail2ban.database       [146]: WARNING New database created. Version '4'
+2024-07-10 15:03:41,474 fail2ban.server         [146]: INFO    Reload all jails
+2024-07-10 15:03:41,474 fail2ban.server         [146]: INFO    Reload finished.
+2024-07-10 17:47:10,605 fail2ban.server         [146]: INFO    Shutdown in progress...
+2024-07-10 17:47:10,608 fail2ban.observer       [146]: INFO    Observer stop ... try to end queue 5 seconds
+2024-07-10 17:47:10,630 fail2ban.observer       [146]: INFO    Observer stopped, 0 events remaining.
+2024-07-10 17:47:10,670 fail2ban.server         [146]: INFO    Stopping all jails
+2024-07-10 17:47:10,672 fail2ban.database       [146]: INFO    Connection to database closed.
+2024-07-10 17:47:10,674 fail2ban.server         [146]: INFO    Exiting Fail2ban
+2024-07-10 17:47:27,069 fail2ban.server         [144]: INFO    --------------------------------------------------
+2024-07-10 17:47:27,070 fail2ban.server         [144]: INFO    Starting Fail2ban v1.0.2
+2024-07-10 17:47:27,072 fail2ban.observer       [144]: INFO    Observer start...
+2024-07-10 17:47:27,093 fail2ban.database       [144]: INFO    Connected to fail2ban persistent database '/config/fail2ban/fail2ban.sqlite3'
