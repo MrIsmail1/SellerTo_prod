@@ -74,6 +74,8 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./client/dist:/usr/share/nginx/html
       - ./nginx/log:/var/log/nginx
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     networks:
       - app-network
 
@@ -93,10 +95,39 @@ services:
     networks:
       - app-network
 
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: >-
+             certonly --reinstall --webroot --webroot-path=/var/www/certbot
+             --email hamzamahmood93150@gmail.com --agree-tos --no-eff-email
+             -d sellerto.store
+
+  certbot-cron:
+    container_name: certbot-cron
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: /bin/sh -c "echo '0 0,12 * * * root certbot renew --webroot --webroot-path=/var/www/certbot --quiet --deploy-hook \"docker-compose restart nginx\"' > /etc/crontabs/root && crond -f -d 8"
+    restart: unless-stopped
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
 volumes:
   mongodb-data:
   postgresql-data:
   fail2ban-data:
+  certbot-conf:
+  certbot-www:
 
 networks:
   app-network:
