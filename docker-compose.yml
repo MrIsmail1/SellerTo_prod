@@ -1,1 +1,44 @@
-## Endlessh && SAMBA
+version: "3"
+services:
+  endlessh:
+    image: lscr.io/linuxserver/endlessh:latest
+    container_name: endlessh
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Paris
+      LOGFILE: "true"
+    volumes:
+      - ./logs:/config/logs/endlessh
+    ports:
+      - 22:2222
+
+  samba:
+    image: dperson/samba
+    container_name: samba
+    ports:
+      - 139:139/tcp
+      - 445:445/tcp
+    restart: unless-stopped
+    healthcheck:
+      disable: true
+    environment:
+      - TZ=Paris/Europe
+      - PUID=1000
+      - PGID=1000
+      - WORKGROUP=workgroup
+      - USER=esgi;esgi@2024
+      - RECYCLE=false
+    volumes:
+      - ./samba/data:/mount
+      - ./samba/config/smb.conf:/etc/samba/smb.conf
+    command: >
+      -p
+      -u "esgi;esgi@2024"
+
+volumes:
+  logs:
+  samba-data:
+
+networks:
+  default:
